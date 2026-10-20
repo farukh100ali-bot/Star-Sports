@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Star Sports - Live Score</title>
+<style>
+  body{
+    background:#000;
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family: Arial, sans-serif;
+  }
+  /* Yehi wo 16:9 ka box hai jo center me rahega */
+  .main-box{
+    width:95%;
+    max-width:900px;
+    aspect-ratio:16/9;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    border:3px solid #22c55e;
+    border-radius:20px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    position:relative;
+    box-shadow: 0 0 30px #22c55e55;
+  }
+  .live-badge{
+    position:absolute;
+    top:20px;
+    left:20px;
+    background:red;
+    padding:5px 15px;
+    border-radius:20px;
+    font-weight:bold;
+    animation: blink 1s infinite;
+  }
+  @keyframes blink{ 50%{opacity:0.5} }
+  .score{font-size:70px; font-weight:900; margin-top:20px;}
+  .batsman{font-size:26px; color:#facc15; margin-top:10px;}
+  .commentary{
+    margin-top:25px;
+    background:#ffffff15;
+    padding:10px 20px;
+    border-radius:10px;
+    font-size:20px;
+  }
+  .title{position:absolute; bottom:15px; font-size:14px; opacity:0.6;}
+</style>
+</head>
+<body>
+
+<div class="main-box">
+  <div class="live-badge">● LIVE</div>
+  <div class="score" id="score">PAK 0/0</div>
+  <div class="batsman" id="batsman">Waiting for Match...</div>
+  <div class="commentary" id="comment">Star-Sports Live Score Starting...</div>
+  <div class="title">Star-Sports | Powered by CricAPI</div>
+</div>
+
+<script>
+// YAHAN AAPKI FREE API KEY LAGEGI
+// Abhi demo score hai, API lagate hi live ho jayega
+
+const API_KEY = "YAHAN_APNI_API_KEY_DALO"; // CricAPI.com se free key le lo
+
+// Demo ke liye - API lagane tak ye chalega
+let runs = 152;
+setInterval(()=>{
+  runs++;
+  document.getElementById("score").innerText = `PAK ${runs}/3 (15.3)`;
+  document.getElementById("batsman").innerText = `Babar Azam ${50 + runs%10}* | Rizwan 42`;
+  document.getElementById("comment").innerText = `Last Ball: ${["1 Run","FOUR!","SIX!","Dot Ball"][Math.floor(Math.random()*4)]}`;
+}, 3000);
+
+// Asli API ka code (Key milne ke baad uncomment karna)
+/*
+async function getLiveScore(){
+  const res = await fetch(`https://api.cricapi.com/v1/currentMatches?apikey=${API_KEY}&offset=0`);
+  const data = await res.json();
+  // yahan data se score set karna
+}
+setInterval(getLiveScore, 10000);
+*/
+</script>
+
+</body>
+  </html>
